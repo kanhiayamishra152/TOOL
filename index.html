@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online tools for image and PDF processing. Compress, convert, merge and more.">
+    <meta property="og:title" content="Image & PDF Tools - Free Online Utilities">
+    <meta property="og:description" content="Free online tools for image and PDF processing. Compress, convert, merge and more.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://example.com">
+    <meta property="og:image" content="https://example.com/og-image.jpg">
+    <title>Image & PDF Tools - Free Online Utilities</title>
+    <style>
+        :root {
+            /* Light theme colors */
+            --primary: #4361ee;
+            --primary-light: #4895ef;
+            --secondary: #3f37c9;
+            --text: #2b2d42;
+            --text-light: #8d99ae;
+            --background: #f8f9fa;
+            --card-bg: #ffffff;
+            --nav-bg: #ffffff;
+            --footer-bg: #2b2d42;
+            --footer-text: #ffffff;
+            --banner-bg: #f1faee;
+            --banner-text: #1d3557;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --border: #e9ecef;
+        }
+
+        [data-theme="dark"] {
+            /* Dark theme colors */
+            --primary: #4895ef;
+            --primary-light: #4361ee;
+            --secondary: #4cc9f0;
+            --text: #f8f9fa;
+            --text-light: #adb5bd;
+            --background: #121212;
+            --card-bg: #1e1e1e;
+            --nav-bg: #1e1e1e;
+            --footer-bg: #0d0d0d;
+            --footer-text: #f8f9fa;
+            --banner-bg: #1d3557;
+            --banner-text: #f1faee;
+            --shadow: rgba(0, 0, 0, 0.3);
+            --border: #333333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header-description {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        nav {
+            background-color: var(--nav-bg);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px var(--shadow);
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem;
+            border-radius: 4px;
+        }
+
+        .nav-links a:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        main {
+            flex: 1;
+            padding: 2rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        section {
+            margin-bottom: 3rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            border-radius: 3px;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .tool-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px var(--shadow);
+            border: 1px solid var(--border);
+            transition: transform 0.2s;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .tool-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tool-card p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .tool-link {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+
+        .tool-link:hover {
+            background-color: var(--secondary);
+        }
+
+        .ad-container {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            margin: 2rem 0;
+            box-shadow: 0 4px 6px var(--shadow);
+        }
+
+        .ad-placeholder {
+            background-color: var(--background);
+            color: var(--text-light);
+            padding: 3rem 1rem;
+            border-radius: 4px;
+            font-style: italic;
+        }
+
+        .privacy-summary {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            box-shadow: 0 4px 6px var(--shadow);
+        }
+
+        .privacy-summary a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .privacy-summary a:hover {
+            text-decoration: underline;
+        }
+
+        .support-section {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            box-shadow: 0 4px 6px var(--shadow);
+            text-align: center;
+        }
+
+        .donate-btn {
+            display: inline-block;
+            background-color: #4cc9f0;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 1rem;
+            transition: background-color 0.2s;
+        }
+
+        .donate-btn:hover {
+            background-color: #3a9fc4;
+        }
+
+        .privacy-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--banner-bg);
+            color: var(--banner-text);
+            padding: 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            z-index: 1000;
+            box-shadow: 0 -2px 10px var(--shadow);
+        }
+
+        .privacy-banner p {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .privacy-banner a {
+            color: var(--banner-text);
+            text-decoration: underline;
+            font-weight: 500;
+        }
+
+        .banner-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .banner-btn {
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            border: none;
+        }
+
+        .accept-btn {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .decline-btn {
+            background-color: transparent;
+            color: var(--banner-text);
+            border: 1px solid currentColor;
+        }
+
+        footer {
+            background-color: var(--footer-bg);
+            color: var(--footer-text);
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                flex-wrap: wrap;
+            }
+
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <button class="theme-toggle" aria-label="Toggle theme">🌓</button>
+        <div class="header-content">
+            <h1>📄 Image & PDF Tools</h1>
+            <p class="header-description">Free online utilities for all your document and image processing needs</p>
+        </div>
+    </header>
+
+    <nav>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#image-tools">Image Tools</a></li>
+            <li><a href="#pdf-tools">PDF Tools</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="image-tools">
+            <h2>Image Tools</h2>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <div class="tool-icon">🖼️</div>
+                    <h3>Image Compressor</h3>
+                    <p>Reduce file size of your images while maintaining quality for faster loading web pages.</p>
+                    <a href="/image-compressor" class="tool-link">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon">🔄</div>
+                    <h3>Image Converter</h3>
+                    <p>Convert between JPG, PNG, GIF, WEBP and other popular image formats.</p>
+                    <a href="/image-converter" class="tool-link">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon">✂️</div>
+                    <h3>Image Cropper</h3>
+                    <p>Crop your images to any size or aspect ratio with our easy-to-use tool.</p>
+                    <a href="/image-cropper" class="tool-link">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon">🖌️</div>
+                    <h3>Image Editor</h3>
+                    <p>Basic editing tools including filters, brightness adjustment and more.</p>
+                    <a href="/image-editor" class="tool-link">Use Tool</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="pdf-tools">
+            <h2>PDF Tools</h2>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <div class="tool-icon">📄</div>
+                    <h3>PDF Compressor</h3>
+                    <p>Reduce PDF file size without significant quality loss for easier sharing.</p>
+                    <a href="/pdf-compressor" class="tool-link">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon">🔄</div>
+                    <h3>PDF Converter</h3>
+                    <p>Convert PDFs to Word, Excel, JPG, or other formats and vice versa.</p>
+                    <a href="/pdf-converter" class="tool-link">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon">🧩</div>
+                    <h3>PDF Merger</h3>
+                    <p>Combine multiple PDF files into a single document in just seconds.</p>
+                    <a href="/pdf-merger" class="tool-link">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon">✂️</div>
+                    <h3>PDF Splitter</h3>
+                    <p>Extract specific pages or split PDFs into multiple documents.</p>
+                    <a href="/pdf-splitter" class="tool-link">Use Tool</a>
+                </div>
+            </div>
+        </section>
+
+        <div class="ad-container">
+            <div class="ad-placeholder">Advertisement</div>
+        </div>
+
+        <div class="privacy-summary">
+            <h3>Privacy Policy Summary</h3>
+            <p>We respect your privacy. Our tools process your files in your browser - no data is sent to our servers unless explicitly stated. For full details, please read our <a href="/privacy-policy">Privacy Policy</a>.</p>
+        </div>
+
+        <div class="support-section">
+            <h3>Support Us</h3>
+            <p>If you find our tools useful, please consider supporting us to help maintain and improve this free service.</p>
+            <a href="#" class="donate-btn">Donate Now</a>
+        </div>
+    </main>
+
+    <div class="privacy-banner" id="privacyBanner">
+        <p>We use cookies to enhance your experience. By continuing to browse, you agree to our use of cookies. <a href="/privacy-policy">Learn more</a></p>
+        <div class="banner-actions">
+            <button class="banner-btn decline-btn">Decline</button>
+            <button class="banner-btn accept-btn">Accept</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; <span id="currentYear"></span> Image & PDF Tools. All rights reserved. Created with ❤️ by ToolMaster</p>
+    </footer>
+
+    <script>
+        // Theme switching functionality
+        const themeToggle = document.querySelector('.theme-toggle');
+        const htmlElement = document.documentElement;
+        
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        htmlElement.setAttribute('data-theme', savedTheme);
+        
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = htmlElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            htmlElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+        
+        // Privacy banner functionality
+        const privacyBanner = document.getElementById('privacyBanner');
+        const acceptBtn = document.querySelector('.accept-btn');
+        const declineBtn = document.querySelector('.decline-btn');
+        
+        // Check if user has already accepted
+        if (localStorage.getItem('cookiesAccepted') === 'true') {
+            privacyBanner.style.display = 'none';
+        }
+        
+        acceptBtn.addEventListener('click', () => {
+            privacyBanner.style.display = 'none';
+            localStorage.setItem('cookiesAccepted', 'true');
+        });
+        
+        declineBtn.addEventListener('click', () => {
+            privacyBanner.style.display = 'none';
+            localStorage.setItem('cookiesAccepted', 'false');
+        });
+        
+        // Update copyright year
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+    </script>
+</body>
+                  </html>
